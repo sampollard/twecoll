@@ -289,6 +289,7 @@ def _members(param, c=None, init=None):
 # first retrieve list of IDs from relation, tweets or list memberships
 # then retrieve details for each 100 at a time
 def init(args):
+  chunk = args.chunksize
   if args.l:
     type = args.l
   else:
@@ -345,9 +346,9 @@ def init(args):
   # retrieve details for all IDs in the bag
   while len(bag) > 0:
     next_items = []
-    if len(bag) > 100:
-      while len(next_items) < 100:
-        next_items = [bag.pop() for _ in xrange(100)]
+    if len(bag) > chunk:
+      while len(next_items) < chunk:
+        next_items = [bag.pop() for _ in xrange(chunk)]
     else:
       next_items = bag
       bag = []
@@ -813,6 +814,8 @@ def main():
     help='retrieve friends data for screen_name')
   sp_init.add_argument('-o', '--followers', action='store_true', \
     help='retrieve followers (default: friends)')
+  sp_init.add_argument('-c', '--chunksize', type=int, \
+    help='Chunks to receive in (default: 100)')
   sp_init.add_argument('-q', '--query', action='store_true', \
     help='extract handles from query (default: screen_name)')
   sp_init.add_argument('-n', '--nomention', action='store_true', \
