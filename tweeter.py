@@ -2,6 +2,8 @@ import random
 import sys
 import pandas as pd
 import HTMLParser
+print("Did you remember to cat <fn>.twt | cut -c '54-' > <fn>.txt ???")
+
 #from bs4 import BeautifulSoup
 # Suppress warnings for reading URL in a tweet
 #import warnings
@@ -20,7 +22,11 @@ df = None
 try:
     df = pd.read_csv(fn)
 except pd.errors.ParserError:
-    df = pd.read_csv(fn, sep="|")
+    try:
+        df = pd.read_csv(fn, sep="|")
+    except pd.errors.ParserError:
+        lines = list(open(fn, 'r'))
+        df = pd.DataFrame(lines)
 finally:
     if df is None:
         print("Unable to read " + fn)
@@ -28,8 +34,10 @@ finally:
 
 if 'is_retweet' in df.columns:
     tweets = df['text'][df['is_retweet'] == False]
-else:
+elif 'text' in df.columns:
     tweets = df['text']
+else:
+    tweets = df[0]
 h = HTMLParser.HTMLParser()
 tweets = tweets.apply(lambda s: h.unescape(s.decode('utf-8')))
 

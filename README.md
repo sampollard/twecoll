@@ -1,3 +1,6 @@
+# Twecoll
+NOTE: If you are coming from a UOregon science fair page, please read the `Getting Started from Scratch` section.
+
 Twecoll is a Twitter command-line tool written in Python. It can be used to retrieve data from Twitter and purge likes (its only data-altering feature). It is based on a sub-command principle meaning calls to twecoll are based on a keyword which instructs twecoll what to do. Below is a list of examples followed by a brief explanation of each command. Running twecoll requires Python 2.7 and the argparse library. It was tested with igraph 0.6 and 0.7.1. The igraph library is optional and is used to generate a clustered graph of the network.
 
 ## Contributors
@@ -134,3 +137,15 @@ sub-commands:
 	- Improved init
 * Version 1.13
 	- Added option to skip mentions from queries in init
+
+## Getting started from scratch
+So, you're trying to visualize some tweets huh? Well this is a bit of an advanced project here for someone without a lot of experience. You need a few things to get started.
+
+1. You must download git. This can be done [here](https://git-scm.com/downloads)
+2. Download python. This can be done [here](https://www.python.org/downloads/). You want Python 2.7.whatever.
+3. Make twitter account. You also must link a phone number. Don't worry, it won't send texts often, you just need it for verification.
+4. You must create a new app on Twitter. This can be done [here](https://apps.twitter.com/). Feel free to use this website as your home page.
+5. Once you get an app, you need to save your Consumer Key and Consumer Secret somewhere. When `twecoll` first runs you need to enter those.
+6. Download and run twecoll! You can start with `python twecoll init @samdpollard` and `python twecoll fetch samdpollard`.
+
+If you have any questions you can find my email at `http://ix.cs.uoregon.edu/~spollard`.
